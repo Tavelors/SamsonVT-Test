@@ -1,0 +1,34 @@
+import bpy 
+import random
+
+
+
+positions = [
+[4,6,3],
+[6,6,3],
+[3,3,3],
+[3,2,3],
+[7,3,3],
+[7,2,3],
+[4,1,3],
+[5,1,3],
+[6,1,3]
+];
+
+for x in positions:
+    
+    ranRot1 = round(random.uniform(0.0, 9.9), 1)
+    ranRot2 = round(random.uniform(0.0, 9.9), 1)
+    ranRot3 = round(random.uniform(0.0, 9.9), 1)
+    
+    ranNumber1 = random.randint(0,15);
+    ranNumber2 = random.randint(0,15);
+    ranNumber3 = random.randint(0,15);    
+    ranNumber4 = random.randint(1,15);
+    
+    bpy.ops.mesh.primitive_cube_add(rotation=(ranRot1, ranRot2, ranRot3), size=1, enter_editmode=False,
+    align='WORLD', location=(x[0], x[1], x[2]), scale=(1, 1, 1))
+    
+    bpy.context.object.color = (ranNumber1,ranNumber2,ranNumber3,ranNumber4)
+
+

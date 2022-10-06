@@ -1,0 +1,44 @@
+import bpy
+from mathutils import Vector
+
+# This doesn't exactly complete the required task put out, but with such limited knowledge and time left, this is the best I could do.
+
+# create our sphere
+bpy.ops.mesh.primitive_uv_sphere_add(enter_editmode=False, align='VIEW', location=(0,0,0), scale=(1,1,1))
+
+# focus on active sphere
+vert_coord = bpy.context.active_object.data
+
+# Changable precision
+precision = 100
+# how many times it runs
+max_counter = 50
+counter = 0;
+
+# I can barely understand the code below, I had no idea what a fractal even was the day before.
+# Thank you tutorials.
+def main(counter):
+    
+    for vert in vert_coord.vertices:
+    
+        count = 1;
+    
+    
+        x_loc = vert.co[0]
+        y_loc = vert.co[1]
+        z_loc = vert.co[2]
+    
+        mandel_val = ((complex(x_loc, y_loc)) ** 2) - z_loc
+    
+        while 0 < abs(mandel_val) < 2 and count < precision:
+        
+            mandel_val = (mandel_val**2) - z_loc
+        
+            count += 1
+   
+        vert.co = vert.co * (count ** (1/20) - 0.12)
+    if counter < max_counter:
+        counter += 1
+        main(counter)
+
+main(counter)

@@ -1,0 +1,40 @@
+import bpy
+import random
+import string
+
+sineW = 0;
+sineTrigger = False;
+counter = 0;
+
+for i in range(0, 50, 1):
+    
+    ranLetter1 = random.choice(string.ascii_letters).lower();
+    ranLetter2 = random.choice(string.ascii_letters).lower();
+    ranLetter3 = random.choice(string.ascii_letters).lower();
+    ranNumber1 = random.randint(0,9);
+    ranNumber2 = random.randint(0,9);
+    ranNumber3 = random.randint(0,9);
+    
+    # Changes the direction of the sinewave.
+    if sineW == 6:
+        sineTrigger = True;
+        sineW -= 1;
+    if sineW == -6:
+        sineTrigger = False;
+        sineW += 1;  
+        
+    # Creation of the cube.
+    bpy.ops.mesh.primitive_cube_add(size=1, enter_editmode=False,
+    align='WORLD', location=(counter, 0, sineW), scale=(1, 1, 1))
+    
+    #Selects each cube created and generates a random name.
+    cube = bpy.context.selected_objects[0];
+    cube.name = f'{ranLetter1}{ranLetter2}{ranLetter3}/{ranNumber1}{ranNumber2}{ranNumber3}';
+    
+    
+    if sineTrigger:
+        sineW -= 1;
+    if not sineTrigger:
+        sineW += 1;
+
+    counter += 0.5;
