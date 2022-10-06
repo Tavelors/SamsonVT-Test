@@ -16,7 +16,7 @@ max_counter = 50
 counter = 0;
 
 # I can barely understand the code below, I had no idea what a fractal even was the day before.
-# Thank you tutorials.
+
 def main(counter):
     
     for vert in vert_coord.vertices:
